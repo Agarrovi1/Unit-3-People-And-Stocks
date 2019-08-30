@@ -24,6 +24,9 @@ struct Users: Codable {
 func alphabetizeUsers(users: [InfoWrapper]) -> [InfoWrapper] {
     return users.sorted(by: {$0.getFullName() < $1.getFullName()})
 }
+func filterUsers(users: [InfoWrapper], search: String) -> [InfoWrapper] {
+    return users.filter({$0.getFullName().contains(search)})
+}
 
 struct InfoWrapper: Codable {
     let name: Name

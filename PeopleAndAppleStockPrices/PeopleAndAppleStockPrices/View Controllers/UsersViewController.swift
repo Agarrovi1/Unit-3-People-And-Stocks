@@ -10,10 +10,18 @@ import UIKit
 
 class UsersViewController: UIViewController {
     @IBOutlet weak var userTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var alphabetizedUsers = [InfoWrapper]()
     var users: [InfoWrapper] {
         get {
-            return alphabetizedUsers
+            guard let searchString = searchString else {return alphabetizedUsers}
+            guard searchString != "" else {return alphabetizedUsers}
+            return filterUsers(users: alphabetizedUsers, search: searchString.lowercased())
+        }
+    }
+    var searchString: String? = nil {
+        didSet {
+            userTableView.reloadData()
         }
     }
     
@@ -34,6 +42,7 @@ class UsersViewController: UIViewController {
         super.viewDidLoad()
         loadData()
         userTableView.dataSource = self
+        searchBar.delegate = self
     }
     
     
@@ -51,6 +60,10 @@ extension UsersViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = person.getFullAddress()
         return cell
     }
-    
-    
+}
+
+extension UsersViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchString = searchBar.text
+    }
 }
