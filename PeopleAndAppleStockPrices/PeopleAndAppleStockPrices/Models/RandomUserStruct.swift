@@ -39,6 +39,9 @@ struct InfoWrapper: Codable {
     func getFullNameUppercased() -> String {
         return name.first.firstUppercased + " " + name.last.firstUppercased
     }
+    func getFullAddress() -> String {
+        return "\(location.street) \(location.city), \(location.state)"
+    }
 }
 struct Name: Codable {
     let title: String
