@@ -26,7 +26,7 @@ class UsersViewController: UIViewController {
     }
     
     
-    func loadData() {
+    private func loadData() {
         guard let pathToData = Bundle.main.path(forResource: "userinfo", ofType: ".json") else {return}
         let url = URL(fileURLWithPath: pathToData)
         do {
@@ -45,6 +45,10 @@ class UsersViewController: UIViewController {
         searchBar.delegate = self
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? UserDetailViewController, let indexPath = userTableView.indexPathForSelectedRow else {return}
+        destination.person = users[indexPath.row]
+    }
     
 }
 

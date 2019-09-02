@@ -59,7 +59,7 @@ struct Location: Codable {
 }
 
 struct Picture: Codable {
-    let medium: String
+    let large: String
 }
 
 extension StringProtocol {
