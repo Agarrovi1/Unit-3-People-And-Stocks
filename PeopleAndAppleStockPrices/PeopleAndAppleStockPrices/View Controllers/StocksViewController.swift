@@ -9,6 +9,10 @@
 import UIKit
 
 class StocksViewController: UIViewController {
+    
+    
+//    guard let pathToStockJSON = Bundle.main.path(forResource: "applstockinfo", ofType: "json")
+//    let url = URL(fileURLWithPath: pathToStockJSON)
 
     override func viewDidLoad() {
         super.viewDidLoad()
