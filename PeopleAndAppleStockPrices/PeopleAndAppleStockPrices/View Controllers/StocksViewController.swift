@@ -9,26 +9,64 @@
 import UIKit
 
 class StocksViewController: UIViewController {
+    @IBOutlet weak var stockTableView: UITableView!
     
-    
-//    guard let pathToStockJSON = Bundle.main.path(forResource: "applstockinfo", ofType: "json")
-//    let url = URL(fileURLWithPath: pathToStockJSON)
+    var stocks = [APPLStocks]()
+    var separateStocks = [[APPLStocks]]() {
+        didSet {
+            stockTableView.reloadData()
+        }
+    }
+    private func loadSeparateStocks() {
+        separateStocks = separateByMonthAndYear(from: stocks)
+    }
+    private func loadData() {
+        guard let pathToStockJSON = Bundle.main.path(forResource: "applstockinfo", ofType: "json") else {return}
+            let url = URL(fileURLWithPath: pathToStockJSON)
+        do {
+            let data = try Data(contentsOf: url)
+            let appleStocks = APPLStocks.getStocks(from: data)
+            stocks = appleStocks
+        } catch {
+            print(error)
+        }
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        stockTableView.dataSource = self
+        loadData()
+        loadSeparateStocks()
         // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension StocksViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        tableView.backgroundColor = .blue
+        return separateStocks.count
     }
-    */
-
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let currentArr = separateStocks[section]
+        let month = getMonth(from: currentArr[0].date)
+        let year = getYear(from: currentArr[0].date)
+        let avg = findAverage(from: currentArr)
+        return "M: \(month) Y: \(year) Avg: \(avg)" 
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return separateStocks[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = stockTableView.dequeueReusableCell(withIdentifier: "stockCell", for: indexPath)
+        let stock = separateStocks[indexPath.section][indexPath.row]
+        cell.textLabel?.text = stock.date
+        cell.detailTextLabel?.text = "\(stock.open)"
+        return cell
+    }
+    
+    
 }

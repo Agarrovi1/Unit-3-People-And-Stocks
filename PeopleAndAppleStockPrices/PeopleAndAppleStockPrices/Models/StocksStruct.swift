@@ -15,7 +15,7 @@ struct APPLStocks: Codable {
     let open: Double
     let label: String
     
-    func getStocks(from data: Data) -> [APPLStocks] {
+    static func getStocks(from data: Data) -> [APPLStocks] {
         do {
             let stocksFromJSON = try JSONDecoder().decode([APPLStocks].self, from: data)
             return stocksFromJSON
@@ -45,6 +45,13 @@ func getYear(from date: String) -> String {
         }
     }
     return year
+}
+func findAverage(from arr: [APPLStocks]) -> Double {
+    var total = Double()
+    for a in arr {
+        total += a.open
+    }
+    return round(total / Double(arr.count) * 100) / 100
 }
 
 func separateByMonthAndYear(from stock: [APPLStocks]) -> [[APPLStocks]] {

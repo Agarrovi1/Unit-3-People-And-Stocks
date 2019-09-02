@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VXJ-vT-t2E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Li5-rO-sa2">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Spf-gI-y0F">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="acX-yc-4pq">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -75,7 +75,7 @@
             </objects>
             <point key="canvasLocation" x="944.92753623188412" y="18.75"/>
         </scene>
-        <!--Stocks View Controller-->
+        <!--Stocks-->
         <scene sceneID="BOk-d8-rbE">
             <objects>
                 <viewController id="BZZ-U2-5uB" customClass="StocksViewController" customModule="PeopleAndAppleStockPrices" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,7 +84,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0RS-Uf-twQ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="stockCell" textLabel="UHn-q2-l4b" detailTextLabel="Il7-KV-cly" style="IBUITableViewCellStyleSubtitle" id="npY-io-tuc">
@@ -123,10 +123,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GJ7-Yx-fhN"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Stocks" id="DnD-Cc-eAs"/>
+                    <connections>
+                        <outlet property="stockTableView" destination="0RS-Uf-twQ" id="9tZ-Tn-Of4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Lb-rH-HKv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="945" y="717"/>
+            <point key="canvasLocation" x="29" y="787"/>
         </scene>
         <!--User Detail View Controller-->
         <scene sceneID="U74-Dg-MYa">
@@ -184,10 +188,11 @@
             </objects>
             <point key="canvasLocation" x="1713.0434782608697" y="18.75"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Users-->
         <scene sceneID="Dc7-Sr-mhs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VXJ-vT-t2E" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Users" id="Co0-oK-RR7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dzv-0t-1Fz">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -201,6 +206,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iqv-e1-3Jj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="29" y="19"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Qba-EC-6BG">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Li5-rO-sa2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1gb-Kv-gki">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BZZ-U2-5uB" kind="relationship" relationship="viewControllers" id="Hbe-zM-OBX"/>
+                        <segue destination="VXJ-vT-t2E" kind="relationship" relationship="viewControllers" id="TDJ-o0-mg2"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AcJ-7G-iPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-881" y="787"/>
         </scene>
     </scenes>
 </document>
