@@ -40,6 +40,10 @@ class StocksViewController: UIViewController {
         loadSeparateStocks()
         // Do any additional setup after loading the view.
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destination = segue.destination as? StockDetailViewController, let indexPath = stockTableView.indexPathForSelectedRow else {return}
+        destination.stock = separateStocks[indexPath.section][indexPath.row]
+    }
 
 }
 
