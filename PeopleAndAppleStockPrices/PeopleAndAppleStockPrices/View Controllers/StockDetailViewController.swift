@@ -40,8 +40,8 @@ class StockDetailViewController: UIViewController {
         super.viewDidLoad()
         guard let stock = stock else {return}
         dateLabel.text = stock.date
-        openLabel.text = stock.open.description
-        closeLabel.text = stock.close.description
+        openLabel.text = "Open: \(stock.open)"
+        closeLabel.text = "Close: \(stock.close)"
         loadStockPic()
         changeBackground()
     }
